@@ -1,19 +1,10 @@
-# DataPreproc
 
-2 užduotis
-
-Nuskaitomas failas
-
-```{r}
 library("sas7bdat")
-# setwd("C:/Users/Lenovo/Desktop/R/Duomenys - 20240228")
+setwd("C:/Users/Lenovo/Desktop/R/Duomenys - 20240228")
 data = read.sas7bdat("donate.sas7bdat")
 
-```
+#Randamos grubios išskirtys ir jos pašalinamos
 
-Randamos grubios išskirtys ir jos pašalinamos
-
-```{r}
 for ( i in 2:length(data))
 {
   lower_bound <- quantile(data[i], 0.25,na.rm=T)
@@ -23,11 +14,9 @@ for ( i in 2:length(data))
   b=data[a, i]
   data_clean = data[-a, ]
 }
-```
 
-Randamos salyginės išskirtys
 
-```{r}
+#Randamos salyginės išskirtys
 for ( i in 2:length(data))
 {
   lower_bound <- quantile(data[i], 0.25,na.rm=T)
@@ -36,4 +25,5 @@ for ( i in 2:length(data))
   a=which((data[i] <= lower_bound - 1.5*IQR & data[i] > lower_bound-3*IQR) | (data[i] > upper_bound + 1.5*IQR & data[i] <= upper_bound + 3*IQR))
   b=data[a, i]
 }
-```
+
+
